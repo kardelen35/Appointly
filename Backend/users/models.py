@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, full_name, password=None, **extra_fields):
+    def create_user(self, email, full_name, password=None, **extra_fields): #password hash
         if not email:
             raise ValueError("The email field is required.")
 
@@ -44,4 +44,4 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["full_name"]
 
     def __str__(self):
-        return self.email
+        return self.full_name
