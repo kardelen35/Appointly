@@ -32,11 +32,21 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    ROLE_CHOICES = [
+    ("owner", "Owner"),
+    ("staff", "Staff"),
+]
     email = models.EmailField(unique=True)
     full_name = models.CharField(max_length=255)
+    role = models.CharField(
+    max_length=10,
+    choices=ROLE_CHOICES,
+    default="owner"
+)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
+    
 
     objects = UserManager()
 
